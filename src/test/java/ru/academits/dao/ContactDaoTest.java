@@ -50,16 +50,4 @@ public class ContactDaoTest {
         int delCount = contactDao.deleteContacts(Arrays.asList(777, -1000));
         assertEquals(delCount, 0);
     }
-
-    @Test
-    public void deleteContactTest() {
-        contactDao.deleteContact(0);
-        List<Contact> contactList = contactDao.getAllContacts();
-        assertEquals(contactList.size(), 1);
-    }
-
-    @Test
-    public void getContactsCountTest() {
-        assertEquals(contactDao.getContactsCount(), 2);
-    }
 }
