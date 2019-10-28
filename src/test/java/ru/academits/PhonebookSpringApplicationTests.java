@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.academits.model.Contact;
-import ru.academits.phonebook.PhoneBookController;
+import ru.academits.controller.PhoneBookController;
 
 import java.util.List;
 

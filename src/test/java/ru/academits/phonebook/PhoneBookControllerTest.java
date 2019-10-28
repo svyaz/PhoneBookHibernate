@@ -1,6 +1,7 @@
 package ru.academits.phonebook;
 
 import org.junit.Test;
+import ru.academits.controller.PhoneBookController;
 import ru.academits.dao.ContactDao;
 import ru.academits.model.Contact;
 import ru.academits.model.ContactValidation;

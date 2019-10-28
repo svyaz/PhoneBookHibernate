@@ -1,6 +1,7 @@
 package ru.academits.phonebook;
 
 import org.junit.Test;
+import ru.academits.controller.ErrorController;
 import ru.academits.model.ErrorInfo;
 
 import static org.junit.Assert.*;

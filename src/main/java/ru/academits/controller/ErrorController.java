@@ -1,4 +1,4 @@
-package ru.academits.phonebook;
+package ru.academits.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
