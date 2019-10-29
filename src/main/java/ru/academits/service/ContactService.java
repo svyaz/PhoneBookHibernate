@@ -5,14 +5,14 @@ import ru.academits.dao.ContactDao;
 import ru.academits.model.Contact;
 import ru.academits.model.ContactValidation;
 import ru.academits.model.ContactsDeletion;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Service
 public class ContactService {
-    private static final Logger logger = LogManager.getLogger(ContactService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ContactService.class);
     private final ContactDao contactDao;
 
     public ContactService(ContactDao contactDao) {
@@ -20,13 +20,8 @@ public class ContactService {
     }
 
     private boolean isExistContactWithPhone(String phone) {
-        List<Contact> contactList = contactDao.getAllContacts();
-        for (Contact contact : contactList) {
-            if (contact.getPhone().equals(phone)) {
-                return true;
-            }
-        }
-        return false;
+        List<Contact> contactList = contactDao.findByPhone(phone);
+        return !contactList.isEmpty();
     }
 
     private ContactValidation validateContact(Contact contact) {
@@ -67,19 +62,28 @@ public class ContactService {
     public ContactValidation addContact(Contact contact) {
         ContactValidation contactValidation = validateContact(contact);
         if (contactValidation.isValid()) {
-            contactDao.add(contact);
+            contactDao.create(contact);
         }
         return contactValidation;
     }
 
-    public ContactsDeletion deleteContacts(List<Integer> idsList) {
-        ContactsDeletion contactsDeletion = new ContactsDeletion();
-        int deletedContactsNumber = contactDao.deleteContacts(idsList);
-        contactsDeletion.setDeleteNumber(deletedContactsNumber);
+    public ContactsDeletion deleteContacts(List<Long> idsList) {
+        int deletedContactsNumber = 0;
 
+        for (Long id : idsList) {
+            Contact contact = contactDao.getById(id);
+            if (contact != null) {
+                deletedContactsNumber++;
+                contactDao.remove(contact);
+            }
+        }
+
+        ContactsDeletion contactsDeletion = new ContactsDeletion();
+        contactsDeletion.setDeleteNumber(deletedContactsNumber);
         if (deletedContactsNumber == 0) {
             contactsDeletion.setError("Ни одного контакта не удалено.");
         }
+
         return contactsDeletion;
     }
 
@@ -88,6 +92,8 @@ public class ContactService {
     }
 
     public List<Contact> getFilteredContacts(String filterString) {
-        return contactDao.getFilteredContacts(filterString);
+        return contactDao.getAllContacts();
+        //TODO дописать метод
+        //return contactDao.getFilteredContacts(filterString);
     }
 }

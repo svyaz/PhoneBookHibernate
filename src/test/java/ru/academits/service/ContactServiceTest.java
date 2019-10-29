@@ -1,7 +1,7 @@
 package ru.academits.service;
 
 import org.junit.Test;
-import ru.academits.dao.ContactDao;
+import ru.academits.dao.ContactDaoImpl;
 import ru.academits.model.Contact;
 import ru.academits.model.ContactValidation;
 import ru.academits.model.ContactsDeletion;
@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ContactServiceTest {
-    private ContactService contactService = new ContactService(new ContactDao());
+    private ContactService contactService = new ContactService(new ContactDaoImpl());
 
     @Test
     public void getAllContactsTest() {
@@ -45,13 +45,13 @@ public class ContactServiceTest {
 
     @Test
     public void deleteContactsTest() {
-        ContactsDeletion deletion = contactService.deleteContacts(Arrays.asList(2, 1, 4, 10, 1234567890));
+        ContactsDeletion deletion = contactService.deleteContacts(Arrays.asList(2L, 1L, 4L, 10L, 1234567890L));
         assertEquals(deletion.getDeleteNumber(), 2);
     }
 
     @Test
     public void deleteContactsZeroDeletedTest() {
-        ContactsDeletion deletion = contactService.deleteContacts(Arrays.asList(888, 999, 1010));
+        ContactsDeletion deletion = contactService.deleteContacts(Arrays.asList(888L, 999L, 1010L));
         assertEquals(deletion.getDeleteNumber(), 0);
         assertEquals(deletion.getError(), "Ни одного контакта не удалено.");
     }

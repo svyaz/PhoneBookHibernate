@@ -1,17 +1,28 @@
 package ru.academits.model;
 
-public class Contact {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private String phone;
-    private boolean important;
+import javax.persistence.*;
 
-    public int getId() {
+@Entity
+@Table(name = "contact")
+public class Contact {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column
+    private String firstName;
+
+    @Column
+    private String lastName;
+
+    @Column
+    private String phone;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -37,14 +48,6 @@ public class Contact {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public boolean isImportant() {
-        return important;
-    }
-
-    public void setImportant(boolean important) {
-        this.important = important;
     }
 
     @Override
