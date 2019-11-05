@@ -7,5 +7,7 @@ import java.util.List;
 public interface ContactDao extends GenericDao<Contact, Long> {
     List<Contact> getAllContacts();
 
+    List<Contact> getFilteredContacts(String filterString);
+
     List<Contact> findByPhone(String phone);
 }

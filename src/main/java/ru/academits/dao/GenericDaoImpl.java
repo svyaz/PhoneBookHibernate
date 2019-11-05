@@ -40,6 +40,7 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
         entityManager.remove(obj);
     }
 
+    @Transactional
     @Override
     public T getById(PK id) {
         return entityManager.find(clazz, id);

@@ -92,8 +92,6 @@ public class ContactService {
     }
 
     public List<Contact> getFilteredContacts(String filterString) {
-        return contactDao.getAllContacts();
-        //TODO дописать метод
-        //return contactDao.getFilteredContacts(filterString);
+        return contactDao.getFilteredContacts(filterString);
     }
 }
