@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.academits.converter.ContactDtoToContactConverter;
 import ru.academits.converter.ContactToContactDtoConverter;
 import ru.academits.dto.ContactDto;
-import ru.academits.model.Contact;
 import ru.academits.model.ContactValidation;
 import ru.academits.model.ContactsDeletion;
 import ru.academits.service.ContactService;
